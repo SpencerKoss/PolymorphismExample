@@ -1,7 +1,6 @@
-//This is a simple program designed to show how Polymorphism works under the hood.
-//I chose to create three classes, One base class and Two derived classes that both extend from the base class
-//This example provides that both the derived classes use the SetAttackPower function for each of them, but 
-//Use the attack power with different variables in their own distinct ways
+//I wanted to provide another example of Polymorphism with the inlcusion of Virtual Functions
+// I showed that in the Base class of Enemy that you can over-write the attack function  in the 
+//Derived classes EVEN though that the Base class has the same function with the 'virtual' Prefix
 
 #include "pch.h"
 #include <iostream>
@@ -9,11 +8,9 @@ using namespace std;
 
 //Base Class
 class Enemy {
-protected:
-	int attackPower;
 public:
-	void setAttackPower(int a) {
-		attackPower = a;
+	virtual void attack() {
+
 	}
 };
 
@@ -21,7 +18,7 @@ public:
 class Mage : public Enemy{
 public:
 	void attack() {
-		cout << "I am the Mage and I cast Greater Pyroblast! -" << attackPower << " health gone!\n";
+		cout << "The Mage attack\n";
 	}
 };
 
@@ -29,25 +26,23 @@ public:
 class Warlock : public Enemy {
 public:
 	void attack() {
-		cout << "I am the Warlock and I cast Choas Bolt! -" << attackPower << " health gone!\n";
+		cout << "The Warlock attack\n";
 	}
 };
 
 
 int main()
 {
-	//Creating objects of the derived classes
-	Mage jaina;
-	Warlock kiljaeden;
+	//Creating objects of the classes
+	Mage m;
+	Warlock w;
 
-	Enemy *enemyOne = &jaina;
-	Enemy *enemyTwo = &kiljaeden;
-	
-	enemyOne->setAttackPower(90);
-	enemyTwo->setAttackPower(70);
+	Enemy *enemyOne = &m;
+	Enemy *enemyTwo = &w;
 
-	jaina.attack();
-	kiljaeden.attack();
- 
+	//Now we are able to use the m, w to call the attack functions
+	m.attack();
+	w.attack();
+
 }
 
